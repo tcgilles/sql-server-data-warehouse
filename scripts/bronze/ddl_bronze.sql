@@ -88,3 +88,18 @@ CREATE TABLE bronze.erp_px_cat_g1v2 (
     maintenance  NVARCHAR(50)
 );
 GO
+
+IF OBJECT_ID('bronze.load_log', 'U') IS NOT NULL
+    DROP TABLE bronze.load_log;
+GO
+
+CREATE TABLE bronze.load_log (
+    LogID 		INT IDENTITY(1,1),
+    TableName 		NVARCHAR(128),
+    Operation 		NVARCHAR(50),
+    [RowCount] 		INT,
+    DurationSeconds 	INT,
+    [Status] 		NVARCHAR(50),
+    ErrorMessage 	NVARCHAR(4000),
+    LogDate 		DATETIME DEFAULT GETDATE()
+)
